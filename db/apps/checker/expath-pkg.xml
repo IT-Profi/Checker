@@ -1,0 +1,1 @@
+<package xmlns="http://expath.org/ns/pkg" name="http://checker.bintellix.de" abbrev="Checker" version="1.0" spec="1.0"><title>Checker</title><dependency package="http://exist-db.org/apps/shared"/></package>

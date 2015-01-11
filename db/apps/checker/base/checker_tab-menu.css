@@ -1,0 +1,147 @@
+/*
+========================================================================
+LICENSE AGREEMENT:
+This software is distributed WITHOUT ANY WARRANTY and without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+========================================================================
+This copy of Checker (an automated compare tool) is licensed under the
+Lesser General Public License (LGPL), version 3 ("the License").
+
+See the License for details about distribution rights, 
+modification and transformation of it.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see http://www.gnu.org/licenses/.
+========================================================================
+Copyright:
+(c) 2010-2015 by InterSecurity GmbH &amp; Co. KG, Germany
+========================================================================
+@Author: Eduard Huber
+@Version: 1.0
+======================================================================== 
+*/
+
+@namespace xf url("http://www.w3.org/2002/xforms");
+.horiz-tab-menu{
+}
+.horiz-tab-menu xf|trigger{
+    border: 10px outset gray;
+    border-bottom:0px;
+    font-weight:bold;
+    font-size:.9em;
+    margin-right:9px;
+    padding:3px;
+    /* round corners at the top of the tab - does not work on older versions of IE */
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+    -moz-border-radius-topleft:5px;
+    -moz-border-radius-topright:5px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+}
+.horiz-tab-menu div:target a {
+   border-bottom:1px solid white;
+   background-color: #E5EECC;
+}
+.horiz-tab-menu div:not(:target) a {
+   border-bottom:none;	
+}
+
+.tab-elements{
+    border-top:white solid 1px;
+    border-left:white solid 1px;
+    border-right:gray solid 1px;
+    border-bottom:gray solid 1px;
+    padding:1ex;
+    background-color:#E0E0E0;
+}
+#case-1,
+#case-2,
+#case-3,
+#case-4,
+#case-5{
+    position:relative;
+}
+#div-1,
+#div-2,
+#div-3,
+#div-4,
+#div-5,
+#div-1-1,
+#div-1-2,
+#div-2-1,
+#div-2-2{
+    padding:5px;
+    border-left:solid gray 1px;
+    border-right:solid gray 1px;
+    border-bottom:solid gray 1px;
+    position:relative;
+}
+#t-case-1,
+#t-case-2,
+#t-case-3,
+#t-case-4,
+#t-case-5,
+#t-case-1-1,
+#t-case-1-2,
+#t-case-2-1,
+#t-case-2-2{
+    padding:3px;
+    -moz-border-top-left-radius:3px;
+    -moz-border-top-right-radius:3px;
+    border-top-left-radius:3px;
+    border-top-right-radius:3px;
+    border-left:1px solid #808080;
+    border-top:1px solid #808080;
+    border-right:1px solid #808080;
+    border-bottom:none;
+}
+#div-1,
+#div-2,
+#div-3,
+#div-4,
+#div-5{
+    background-color:#CCC;
+}
+#t-case-1,
+#div-1 .headline{
+    background-color:#FC3;
+}
+#t-case-2,
+#div-2 .headline{
+    background-color:#6A0;
+}
+#t-case-3,
+#div-3 .headline{
+    background-color:lightblue;
+}
+#t-case-4,
+#div-4 .headline{
+    background-color:#6AF;
+}
+#t-case-5,
+#div-5 .headline{
+    background-color:#CCCCCC;
+}
+
+#div-1 .headline,
+#div-2 .headline,
+#div-3 .headline,
+#div-4 .headline,
+#div-5 .headline{
+    padding:5px;
+    margin:-5px -5px 0 -5px;
+}
+
+.horiz-tab-menu a{
+    font-weight:bold;
+    text-decoration:none;
+    color:black;
+}
+
+#t-case-1-1,
+#t-case-1-2,
+#t-case-2-1,
+#t-case-2-2{
+    background-color:#E0E0E0;
+}
