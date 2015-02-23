@@ -30,7 +30,7 @@ Copyright:
         <!-- concat('/db',$exist:prefix,$exist:controller,'/data') -->
     </bc:home>
     <bc:cmd>
-        <bc:path>~/Desktop/Checker_Offline/</bc:path>
+        <bc:path>/Applications/Checker_Offline/</bc:path>
         <!-- C:\ProgramData\Checker_Offline\ -->
         <bc:filename>Checkset.sh</bc:filename>
         <!-- Checkset.cmd -->
