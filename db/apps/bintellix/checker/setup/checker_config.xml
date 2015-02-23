@@ -19,4 +19,25 @@ Copyright:
 @Author: Eduard Huber
 @Version: 1.0
 ======================================================================== 
---><bc:config xmlns:bc="http://checker.bintellix.de/"><bc:home><bc:web>/exist/apps/bintellix/checker</bc:web> <!-- concat('/exist',$exist:prefix,$exist:controller) --><bc:db>/db/apps/bintellix/checker</bc:db> <!-- concat('/db',$exist:prefix,$exist:controller) --><bc:data>/db/apps/bintellix/checker_data</bc:data> <!-- concat('/db',$exist:prefix,$exist:controller,'/data') --></bc:home><bc:cmd><bc:path>~/Desktop/CT/tools/Checker</bc:path> <!-- C:\ProgramData\Tools\Compare\ --><bc:filename>Checkset.sh</bc:filename> <!-- Compare.cmd --><bc:quoting-symbol/></bc:cmd><bc:set><bc:filename-pattern>checkset_{$step}.xml</bc:filename-pattern> <!-- step_{$group}_{$step}.xml --></bc:set></bc:config>
+-->
+<bc:config xmlns:bc="http://checker.bintellix.de/">
+    <bc:home>
+        <bc:web>/exist/apps/bintellix/checker</bc:web>
+        <!-- concat('/exist',$exist:prefix,$exist:controller) -->
+        <bc:db>/db/apps/bintellix/checker</bc:db>
+        <!-- concat('/db',$exist:prefix,$exist:controller) -->
+        <bc:data>/db/apps/bintellix/checker_data</bc:data>
+        <!-- concat('/db',$exist:prefix,$exist:controller,'/data') -->
+    </bc:home>
+    <bc:cmd>
+        <bc:path>~/Desktop/Checker_Offline/</bc:path>
+        <!-- C:\ProgramData\Checker_Offline\ -->
+        <bc:filename>Checkset.sh</bc:filename>
+        <!-- Checkset.cmd -->
+        <bc:quoting-symbol/>
+    </bc:cmd>
+    <bc:set>
+        <bc:filename-pattern>checkset_{$step}.xml</bc:filename-pattern>
+        <!-- step_{$group}_{$step}.xml -->
+    </bc:set>
+</bc:config>
