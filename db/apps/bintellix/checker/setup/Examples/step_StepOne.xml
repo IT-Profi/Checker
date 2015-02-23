@@ -1,0 +1,52 @@
+<cs:step xmlns="http://www.w3.org/1999/xhtml" xmlns:cs="http://checker.bintellix.de/checkset/" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:c="http://checker.bintellix.de/checkset/" xmlns:bf="http://betterform.sourceforge.net/xforms" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xf="http://www.w3.org/2002/xforms" version="1"><cs:identity><cs:step-group>Examples</cs:step-group><cs:step-id>StepOne</cs:step-id><cs:step-order>1</cs:step-order><cs:notes>This example shows:
+            - the namespace prefix does not care
+            - the order of attributes does not care
+            - the XML format (formatted / inline) does not care  
+            - the order of elements can optionally ignored
+            - how a changed order will be displayed
+        </cs:notes></cs:identity><cs:checkset version="1"><cs:variables type="LOCAL"><cs:variable description="Checker Server" name="CheckerHome" selected="http://localhost:8080/exist/apps/bintellix/checker"/></cs:variables><cs:current><cs:document><cs:data>&lt;test:example xmlns:test="http://www.example.com/test/"&gt;
+                    &lt;test:items id="three" selected="false" required="false"&gt; 
+                    Before 
+                    &lt;test:item name="two"&gt;Nothing&lt;/test:item&gt;
+                    Inbetween
+                    &lt;test:item name="one"&gt;All&lt;/test:item&gt;
+                    After 
+                    &lt;/test:items&gt;
+                    &lt;test:items id="one" selected="true" required="true"&gt;
+                    &lt;test:item name="one"&gt;Alpha&lt;/test:item&gt;
+                    &lt;test:item name="three"&gt;Charly&lt;/test:item&gt;
+                    &lt;test:item name="two"&gt;Bravo&lt;/test:item&gt;
+                    &lt;/test:items&gt;
+                    &lt;test:items id="two" required="true"&gt;
+                    &lt;test:item name="two"&gt;Yankee&lt;/test:item&gt;
+                    &lt;test:item name="three"&gt;Zolo&lt;/test:item&gt;
+                    &lt;test:item name="one"&gt;Xray&lt;/test:item&gt;
+                    &lt;/test:items&gt;
+                    &lt;/test:example&gt;</cs:data><cs:validate><cs:schema active="true"><cs:url>{$CheckerHome}/base/test.xsd</cs:url></cs:schema></cs:validate></cs:document><cs:connections><cs:connection enabled="true" name="Global" type="XML"><cs:xml/><cs:file><cs:url>http://</cs:url></cs:file><cs:soap><cs:url>{$current_ws}/SFIntegration/DigitalSFService/DigitalSFService</cs:url><cs:action>http://www.bmwfs.com/DigitalSF/getFinanceProducts</cs:action><cs:request type="XML"><cs:url>http://</cs:url><cs:data>&lt;S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+                                &lt;S:Body&gt;
+                                &lt;empty/&gt;
+                                &lt;/S:Body&gt;
+                                &lt;/S:Envelope&gt;
+                            </cs:data></cs:request></cs:soap><cs:rest><cs:url>http://</cs:url><cs:type>GET</cs:type><cs:request type="XML"><cs:url>http://</cs:url><cs:data>&lt;empty/&gt;</cs:data></cs:request></cs:rest><cs:json><cs:url>http://</cs:url><cs:type>DEFAULT</cs:type><cs:request type="XML"><cs:url>http://</cs:url><cs:data>&lt;empty/&gt;</cs:data></cs:request></cs:json><cs:validate><cs:schema active="false"><cs:url>{$market_configurator}/exist/apps/digital/configurator/base/SFFinanceProductRequest.xsd</cs:url></cs:schema></cs:validate></cs:connection></cs:connections></cs:current><cs:master><cs:document><cs:data>&lt;test:example xmlns:test="http://www.example.com/test/"&gt;
+                    &lt;test:items id="one" required="true" selected="true"&gt;
+                    &lt;test:item name="one"&gt;Alpha&lt;/test:item&gt;
+                    &lt;test:item name="two"&gt;Bravo&lt;/test:item&gt;
+                    &lt;test:item name="three"&gt;Charly&lt;/test:item&gt;
+                    &lt;/test:items&gt;
+                    &lt;test:items id="two" required="true"&gt;
+                    &lt;test:item name="one"&gt;Xray&lt;/test:item&gt;
+                    &lt;test:item name="two"&gt;Yankee&lt;/test:item&gt;
+                    &lt;test:item name="three"&gt;Zolo&lt;/test:item&gt;
+                    &lt;/test:items&gt;
+                    &lt;test:items id="three" required="false" selected="false"&gt; 
+                    Before 
+                    &lt;test:item name="one"&gt;All&lt;/test:item&gt;
+                    Inbetween
+                    &lt;test:item name="two"&gt;Nothing&lt;/test:item&gt;
+                    After
+                    &lt;/test:items&gt;
+                    &lt;/test:example&gt;</cs:data><cs:validate><cs:schema active="true"><cs:url>{$CheckerHome}/base/test.xsd</cs:url></cs:schema></cs:validate></cs:document><cs:connections><cs:connection enabled="true" name="MC" type="XML"><cs:xml/><cs:file><cs:url>http://</cs:url></cs:file><cs:soap><cs:url>{$market_configurator}/exist/apps/digital/configurator/tm/bmw/0/global-test</cs:url><cs:action>http://www.bmwfs.com/DigitalSF/getFinanceProducts</cs:action><cs:request type="XML"><cs:url>http://</cs:url><cs:data>&lt;S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+                                &lt;S:Body&gt;
+                                &lt;empty/&gt;
+                                &lt;/S:Body&gt;
+                                &lt;/S:Envelope&gt;</cs:data></cs:request></cs:soap><cs:rest><cs:url>http://</cs:url><cs:type>GET</cs:type><cs:request type="XML"><cs:url>http://</cs:url><cs:data>&lt;empty/&gt;</cs:data></cs:request></cs:rest><cs:json><cs:url>http://</cs:url><cs:type>DEFAULT</cs:type><cs:request type="XML"><cs:url>http://</cs:url><cs:data>&lt;empty/&gt;</cs:data></cs:request></cs:json><cs:validate><cs:schema active="false"><cs:url>{$market_configurator}/exist/apps/digital/configurator/base/SFFinanceProductRequest.xsd</cs:url></cs:schema></cs:validate></cs:connection></cs:connections></cs:master><cs:groups type="GROUP"/><cs:usage><cs:use-group enabled="false" filter="/fpr:SFFinanceProductResponse" ref-id="empty" title="XYZ" type="CLEANUP"/></cs:usage><cs:runsets><cs:runset active="yes" id="Start1"/></cs:runsets></cs:checkset></cs:step>

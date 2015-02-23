@@ -1,0 +1,30 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/bintellix/checker/group" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" version="1">
+    <acl entries="0" version="1"/>
+    <resource type="BinaryResource" name="group_copy_response.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:07:04+01:00" filename="group_copy_response.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="group_copy.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:07:03+01:00" filename="group_copy.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="group_edit.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:07:03+01:00" filename="group_edit.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="group_delete_response.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:07:04+01:00" filename="group_delete_response.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="group_edit_response.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:07:04+01:00" filename="group_edit_response.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="group_overview.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:07:04+01:00" filename="group_overview.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="group_delete.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:07:04+01:00" filename="group_delete.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="group_create_response.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:07:04+01:00" filename="group_create_response.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="group_create.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:07:04+01:00" filename="group_create.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

@@ -1,0 +1,27 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/bintellix/checker/admin" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:44+01:00" version="1">
+    <acl entries="0" version="1"/>
+    <resource type="BinaryResource" name="config_edit.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:44+01:00" modified="2015-02-18T13:07:09+01:00" filename="config_edit.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="upgrade.xql" owner="admin" group="dba" mode="4755" created="2015-02-13T17:17:44+01:00" modified="2015-02-18T13:07:09+01:00" filename="upgrade.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="index.html" owner="admin" group="dba" mode="744" created="2015-02-13T17:17:44+01:00" modified="2015-02-18T13:15:17+01:00" filename="index.html" mimetype="text/html">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="config_edit_response.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:44+01:00" modified="2015-02-18T13:07:09+01:00" filename="config_edit_response.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="refresh.xql" owner="admin" group="dba" mode="4755" created="2015-02-13T17:17:44+01:00" modified="2015-02-18T13:07:09+01:00" filename="refresh.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="validate.xql" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:44+01:00" modified="2015-02-18T13:07:10+01:00" filename="validate.xql" mimetype="application/xquery">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="upgrade_v1.xsl" owner="admin" group="dba" mode="744" created="2015-02-13T17:17:44+01:00" modified="2015-02-18T13:15:17+01:00" filename="upgrade_v1.xsl" mimetype="application/xslt+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="upgrade_cleanup.xsl" owner="admin" group="dba" mode="744" created="2015-02-13T17:17:44+01:00" modified="2015-02-18T13:15:17+01:00" filename="upgrade_cleanup.xsl" mimetype="application/xslt+xml">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

@@ -1,0 +1,16 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/apps/bintellix/checker/setup" owner="admin" group="dba" mode="755" created="2015-02-13T17:17:45+01:00" version="1">
+    <acl entries="0" version="1"/>
+    <resource type="XMLResource" name="step.xml" owner="admin" group="dba" mode="744" created="2015-02-13T17:17:45+01:00" modified="2015-02-13T17:17:45+01:00" filename="step.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="step_group_template.xml" owner="admin" group="dba" mode="744" created="2015-02-13T17:17:45+01:00" modified="2015-02-13T18:02:44+01:00" filename="step_group_template.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="step_template.xml" owner="admin" group="dba" mode="744" created="2015-02-13T17:17:45+01:00" modified="2015-02-13T17:17:45+01:00" filename="step_template.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="XMLResource" name="checker_config.xml" owner="admin" group="dba" mode="744" created="2015-02-13T17:17:45+01:00" modified="2015-02-18T13:15:15+01:00" filename="checker_config.xml" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+    <subcollection name="Examples" filename="Examples"/>
+</collection>

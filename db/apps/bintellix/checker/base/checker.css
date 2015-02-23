@@ -1,0 +1,327 @@
+/*
+========================================================================
+LICENSE AGREEMENT:
+This software is distributed WITHOUT ANY WARRANTY and without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+========================================================================
+This copy of Checker (an automated compare tool) is licensed under the
+Lesser General Public License (LGPL), version 3 ("the License").
+
+See the License for details about distribution rights, 
+modification and transformation of it.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see http://www.gnu.org/licenses/.
+========================================================================
+Copyright:
+(c) 2010-2015 by InterSecurity GmbH &amp; Co. KG, Germany
+========================================================================
+@Author: Eduard Huber
+@Version: 1.0
+======================================================================== 
+*/
+
+@namespace xf url("http://www.w3.org/2002/xforms");
+
+body{
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    color:#262626;
+    background:none;
+    margin:0 1ex 0 1ex;
+}
+
+a img{
+    border:none;
+}
+
+table{
+    min-width: 600px;
+    font-size:100%;
+    border-spacing:10px;
+}
+
+table th.index,
+table td.index {
+    width: 4ex;
+    text-align: center;
+}
+
+table th,
+thead td{
+    font-weight:bold;
+}
+
+table td,
+table th{
+    padding-left:1ex;
+    padding-right:1ex;
+}
+
+th,
+th .xfControl,
+th a:link,
+thead tr{
+    color:#FFF;
+    background-color:#999;
+    text-align:left;
+    font-weight:normal;
+}
+
+th,
+th .xfControl{
+    padding:0 1ex 0 1ex;
+}
+
+.tableform{
+    border-collapse:collapse;
+}
+
+.tableform,
+.tableform th,
+.tableform td{
+    border:1px solid #666;
+}
+
+tr.even{
+    background-color:#E3E3E3;
+}
+
+tr.odd{
+    background-color:#F3F3F3;
+}
+
+.tableform tfoot td,
+.tableform tfoot th{
+    background-color: #CCC;    
+}
+
+div.breadcrump,
+div.menue{
+    background-color:#999;
+    color:#FFF;
+    margin:0px;
+    padding:0px 5px 5px 5px;
+    font-weight:bold;
+    height:2em;
+    line-height:2em;
+    margin-left: -1ex;
+    margin-right: -1ex;
+    margin-bottom: 0;
+}
+
+div.breadcrump a,
+div.menue a{
+    color:#FFF;
+}
+
+h1,
+h2,
+h3,
+h4,
+h1 .xfControl,
+h2 .xfControl,
+h3 .xfControl,
+h4 .xfControl{
+    font-weight:normal;
+}
+
+h1,
+h2{
+    font-size:130%;
+    background-color:#E9E9E9;
+    padding: 2px 1ex;
+    margin: 0 -1ex 1ex -1ex;
+}
+
+.widgetContainer{
+    /*width:100%;*/
+}
+
+.xfControl .xfValue{
+}
+
+label,
+label.xfLabel{
+    font-weight:bold;
+    color:#262626;
+    vertical-align: top;
+}
+
+.left label.xfLabel{
+    float:left;
+    padding-right:1em;
+}
+
+button,
+input.xfValue,
+select.xfValue{
+    font-family:Arial,sans-serif;
+    font-size:13px;
+}
+
+.fixedLenght input.xfValue{
+    width:37ex;
+    margin-right:1ex;
+}
+
+tr.xfRepeatItem td{
+    padding:1px 2px 1px 2px;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border:2px solid #1C69D4;
+}
+
+div#content span.xfContainer{
+    display:table;
+}
+
+.xfControl{
+    color:#262626;
+    display:inline-block;
+}
+
+.xfRepeatIndex,
+.xfRepeatIndex th,
+.xfRepeatIndex .xfControl{
+    background-color:#1C69D4;
+}
+
+.xfOptional input,
+.xfOptional select,
+.xfOptional textarea{
+    background-color:#DFD;
+}
+
+.xfRequired input,
+.xfRequired select,
+.xfRequired textarea{
+    background-color:#FFD;
+}
+/*
+.xfCase .xfInvalid,
+.xfCase .xfRequiredEmpty,
+*/
+.xfInvalidCase,
+.xfInvalid input,
+.xfInvalid select,
+.xfInvalid textarea,
+.xfRequiredEmpty .xfValue{
+    background-color:#FDD !important;
+    border-width: 2px;
+}
+
+.xfFullGroup .xfControl {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.xfFullGroup .xfLabel {
+    width: 13em;
+}
+
+.xfFullGroup .xfControl .xfValue {
+    /* width: 30em; */
+}
+
+.xfFullGroup > .xfGroupLabel {
+   border-bottom: 2px solid orange;
+   margin-bottom: 5px;
+}
+
+.xfGroupLabel {
+    font-weight: bold;
+    padding-top: 1ex;
+    padding-bottom: 0.5ex;
+}
+.Status{
+    display: none;
+}
+
+.Status .xfInvalid,
+.Status .xfInvalidCase,
+.Status .xfRequiredEmpty{
+    display:inline-block;
+    background-color:#FDD !important;
+    border-width: 2px;
+}
+
+.buttonComp button,
+a.buttonComp{
+    text-align:center;
+    overflow:hidden;
+    display:inline-block;
+    color:#FFF;
+    padding:4px 1em 4px 1em;
+    border:0px none;
+    background-color:#777;
+    cursor:pointer;
+    max-height:30px;
+    line-height:1em;
+    margin-top:5px;
+}
+
+.buttonBlue button{
+    background-color:#1C69D4;
+    background-position:0px -149px;
+}
+
+
+.tooltip{
+    display:inline;
+    position:relative;
+}
+
+.tooltip:hover:after{
+    background:#333;
+    background:rgba(0, 0, 0, .8);
+    border-radius:5px;
+    bottom:26px;
+    color:#fff;
+    content:attr(title);
+    left:20%;
+    padding:5px 15px;
+    position:absolute;
+    z-index:98;
+    width:220px;
+}
+
+.tooltip:hover:before{
+    border:solid;
+    border-color:#333 transparent;
+    border-width:6px 6px 0 6px;
+    bottom:20px;
+    content:"";
+    left:50%;
+    position:absolute;
+    z-index:99;
+}
+
+:link{
+    color:#33A;
+}
+:visited{
+    color:#333;
+}
+
+div.Error{
+    background-color:#FA0;
+}
+.step-info{
+    border: 1px solid #CCC;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding:1ex;
+}
+
+div#content .inline span.xfContainer{
+    display: inline-block;
+}
+
+.xfReadOnly > .widgetContainer > .xfValue{
+    cursor: text !important;
+}
