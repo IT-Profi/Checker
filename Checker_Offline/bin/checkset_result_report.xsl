@@ -14,17 +14,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/.
 ========================================================================
 Copyright:
-(c) 2010-2014 by InterSecurity GmbH & Co. KG, Germany
+(c) 2010-2015 by InterSecurity GmbH & Co. KG, Germany
 ========================================================================
 @Author: Eduard Huber
 @Version: 1.0
 ======================================================================== 
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:c="http://www.w3.org/ns/xproc-step" xmlns:diff="http://compare.intersecurity.net/diff/" xmlns:cs="http://checker.bintellix.de/checkset/" xmlns:er="http://compare.intersecurity.net/error-report/" exclude-result-prefixes="#all" version="2.0">
-    <xsl:output encoding="UTF-8" method="xhtml" omit-xml-declaration="no"/>
+<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cs="http://checker.bintellix.de/checkset/" xmlns:c="http://www.w3.org/ns/xproc-step" xmlns:diff="http://compare.intersecurity.net/diff/" xmlns:er="http://compare.intersecurity.net/error-report/" exclude-result-prefixes="c diff cs er" version="2.0">
+    <xsl:output encoding="UTF-8" method="xhtml" omit-xml-declaration="no" indent="no"/>
     <xsl:strip-space elements="*"/>
     <xsl:template match="/">
-        <html xmlns="http://www.w3.org/1999/xhtml">
+        <html>
             <head>
                 <title>Error Report - <xsl:value-of select="cs:step/cs:identity/cs:step-group"/> / <xsl:value-of select="cs:step/cs:identity/cs:step-id"/>
                 </title>
@@ -171,7 +171,9 @@ Copyright:
         </xsl:choose>
         <br/>
     </xsl:template>
-    <xsl:template match="cs:result/cs:current/cs:schema/cs:data | cs:result/cs:master/cs:schema/cs:data"/>
+    <xsl:template match="cs:result/cs:current/cs:schema/cs:data | cs:result/cs:master/cs:schema/cs:data">
+        <xsl:apply-templates/>
+    </xsl:template>
     <xsl:template match="cs:result/cs:current/cs:validate | cs:result/cs:master/cs:validate">
         <b>Ruleset Check</b>
         <xsl:text> - </xsl:text>
@@ -304,12 +306,19 @@ Copyright:
         </span>
         <br/>
     </xsl:template>
-    <xsl:template match="diff:changed[string-length(../text())&gt;0]" mode="style" priority="1"/>
+    <!-- <xsl:template match="diff:changed[string-length(../text())>0]" mode="style" priority="1"/> -->
     <xsl:template match="diff:changed" mode="style" priority="0">
+        <!--
         <span class="note">
             <xsl:text>[</xsl:text>
-            <xsl:value-of select="normalize-space(.)"/>
+            <xsl:value-of select="replace(., '^\s*(.+?)\s*$', '$1')"/>
             <xsl:text>]</xsl:text>
+        </span>
+    -->
+    </xsl:template>
+    <xsl:template match="diff:removed" mode="style" priority="0">
+        <span class="note">
+            <xsl:text>[]</xsl:text>
         </span>
     </xsl:template>
     <xsl:template match="@diff:added[.='element']" mode="style">
@@ -450,12 +459,6 @@ Copyright:
                         <div class="inline" style="width:{1*15}px">&#160;</div>
                         <div class="inline" style="width:{$row *10}px">&#160;</div>
                     </xsl:when>
-                    <xsl:when test="*[local-name()='changed' and namespace-uri()='http://compare.intersecurity.net/diff/']">
-                        <xsl:apply-templates mode="style">
-                            <xsl:with-param name="row" select="$row +1"/>
-                            <xsl:with-param name="new" select="$new or @diff:added"/>
-                        </xsl:apply-templates>
-                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:apply-templates mode="style">
                             <xsl:with-param name="row" select="$row +1"/>
@@ -515,20 +518,37 @@ Copyright:
         <br/>
     </xsl:template>
     <xsl:template match="text()" priority="-1" mode="style">
+        <xsl:if test="preceding-sibling::* or following-sibling::*">
+            <xsl:choose>
+                <xsl:when test="count(preceding-sibling::*)=0 and count(following-sibling::*[namespace-uri()!='http://compare.intersecurity.net/diff/'])=0">
+                    <!-- nothing to do as inline -->
+                </xsl:when>
+                <xsl:when test="(following-sibling::diff:changed)[1] or (following-sibling::diff:removed)[1]">
+                    <xsl:variable name="defects" select="count(preceding::*[@diff:moved]) + count(ancestor::*[@diff:moved])"/>
+                    <a style="text-decoration: none;" id="changed_{$defects}" name="changed{$defects}" href="#changed_{$defects+1}">
+                        <div style="width:{1*15}px" class="diff changed inline">&#160;</div>
+                    </a>
+                </xsl:when>
+                <xsl:otherwise>
+                    <div class="inline" style="width:{1*15}px">&#160;</div>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
         <xsl:choose>
-            <xsl:when test="../diff:changed">
+            <xsl:when test="(following-sibling::diff:changed)[1] or (following-sibling::diff:removed)[1]">
                 <span class="warning">
-                    <xsl:value-of select="normalize-space(.)"/>
+                    <xsl:value-of select="replace(.,' ','&#160;')"/>
                 </span>
+                <xsl:text> </xsl:text>
                 <span class="note">
                     <xsl:text>[</xsl:text>
-                    <xsl:value-of select="normalize-space(../diff:changed)"/>
+                    <xsl:value-of select="replace((following-sibling::diff:changed)[1],' ','&#160;')"/>
                     <xsl:text>]</xsl:text>
                 </span>
             </xsl:when>
             <xsl:when test="../@diff:changed[.='text']">
                 <span class="warning">
-                    <xsl:value-of select="normalize-space(.)"/>
+                    <xsl:value-of select="."/>
                 </span>
                 <span class="note">
                     <xsl:text>[changed]</xsl:text>
@@ -536,13 +556,16 @@ Copyright:
             </xsl:when>
             <xsl:when test="ancestor-or-self::*/@diff:added[.='element']">
                 <span class="warning">
-                    <xsl:value-of select="normalize-space(.)"/>
+                    <xsl:value-of select="."/>
                 </span>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="normalize-space(.)"/>
+                <xsl:value-of select="."/>
             </xsl:otherwise>
         </xsl:choose>
+        <xsl:if test="preceding-sibling::* or following-sibling::*">
+            <br/>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="node()|@*" priority="-2" mode="style">
         <xsl:param name="row" select="0"/>

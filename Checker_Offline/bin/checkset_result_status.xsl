@@ -20,7 +20,7 @@ Copyright:
 @Version: 1.0
 ======================================================================== 
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:c="http://www.w3.org/ns/xproc-step" xmlns:diff="http://compare.intersecurity.net/diff/" xmlns:cs="http://checker.bintellix.de/checkset/" xmlns:er="http://compare.intersecurity.net/error-report/" exclude-result-prefixes="#all" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cs="http://checker.bintellix.de/checkset/" xmlns:c="http://www.w3.org/ns/xproc-step" xmlns:diff="http://compare.intersecurity.net/diff/" xmlns:er="http://compare.intersecurity.net/error-report/" exclude-result-prefixes="#all" version="2.0">
     <xsl:param name="CurrentSchemaDisabled" select="'no'"/>
     <xsl:param name="CurrentValidateDisabled" select="'no'"/>
     <xsl:param name="CurrentCompareDisabled" select="'no'"/>
@@ -43,7 +43,7 @@ Copyright:
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
-                        <xsl:when test="../cs:data//c:errors[string-length(.) = 0] or ../cs:data/cs:error">
+                        <xsl:when test="../cs:data//c:errors[string-length(.) = 0] or ../cs:data/cs:error or ..//c:error">
                             <xsl:text>failed</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
@@ -62,7 +62,7 @@ Copyright:
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
-                        <xsl:when test="../cs:data//c:errors[string-length(.) = 0] or ../cs:data/cs:error">
+                        <xsl:when test="../cs:data//c:errors[string-length(.) = 0] or ../cs:data/cs:error or ..//c:error">
                             <xsl:text>failed</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
@@ -81,7 +81,7 @@ Copyright:
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
-                        <xsl:when test="../cs:data//er:critical or ../cs:data//er:error">
+                        <xsl:when test="../cs:data//er:critical or ../cs:data//er:error or ..//c:error">
                             <xsl:text>failed</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
@@ -100,7 +100,7 @@ Copyright:
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
-                        <xsl:when test="../cs:data//er:critical or ../cs:data//er:error">
+                        <xsl:when test="../cs:data//er:critical or ../cs:data//er:error or ..//c:error">
                             <xsl:text>failed</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
@@ -119,7 +119,7 @@ Copyright:
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
-                        <xsl:when test="../cs:data//@diff:*[local-name()!='moved'] or ../cs:data//diff:* or ../cs:data//er:critical or ../cs:data//er:error">
+                        <xsl:when test="../cs:data//@diff:*[local-name()!='moved'] or ../cs:data//diff:* or ../cs:data//er:critical or ../cs:data//er:error or ..//c:error">
                             <xsl:text>failed</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
@@ -138,7 +138,7 @@ Copyright:
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
-                        <xsl:when test="../cs:data//@diff:*[local-name()!='moved'] or ../cs:data//diff:* or ../cs:data//er:critical or ../cs:data//er:error">
+                        <xsl:when test="../cs:data//@diff:*[local-name()!='moved'] or ../cs:data//diff:* or ../cs:data//er:critical or ../cs:data//er:error or ..//c:error">
                             <xsl:text>failed</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>

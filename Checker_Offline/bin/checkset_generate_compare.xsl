@@ -14,23 +14,34 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/.
 ========================================================================
 Copyright:
-(c) 2010-2014 by InterSecurity GmbH & Co. KG, Germany
+(c) 2010-2015 by InterSecurity GmbH & Co. KG, Germany
 ========================================================================
 @Author: Eduard Huber
 @Version: 1.0
 ======================================================================== 
+--><!--
+Input has to be a checkset including namespaces and order-ignore elements
 -->
-<xsl:stylesheet 
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:diff="http://compare.intersecurity.net/diff/" 
-    xmlns:cs="http://checker.bintellix.de/checkset/" 
-    xmlns:xxx="http://compare.intersecurity.net/dummy/" 
-    version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cs="http://checker.bintellix.de/checkset/" xmlns:xxx="http://compare.intersecurity.net/dummy/" xmlns:diff="http://compare.intersecurity.net/diff/" version="2.0">
     <xsl:output omit-xml-declaration="yes" indent="no"/>
     <xsl:namespace-alias result-prefix="xsl" stylesheet-prefix="xxx"/>
     <xsl:variable name="NamespaceList" select="/cs:step/cs:namespaces"/>
     <xsl:variable name="IgnoredOrderList" select="/cs:step/cs:checksets/cs:config/cs:ignore-orders"/>
     <xsl:template match="/">
+        <xsl:comment>Input has to be a XML with the following structure like this: 
+                &lt;diff&gt;
+                    &lt;current&gt;
+                        &lt;test:example xmlns:test="http://www.example.com/test/"&gt;
+                            &lt;value&gt;one&lt;/value&gt;
+                        &lt;/test&gt;
+                    &lt;/current&gt;
+                    &lt;master&gt;
+                        &lt;test:example xmlns:test="http://www.example.com/test/"&gt;
+                            &lt;value&gt;one&lt;/value&gt;
+                        &lt;/test&gt;
+                    &lt;/master&gt;
+                &lt;/diff&gt;
+        </xsl:comment>
         <xxx:stylesheet xmlns:er="http://compare.intersecurity.net/error-report/" exclude-result-prefixes="cs" version="2.0">
             <xsl:for-each select="$NamespaceList/cs:namespace">
                 <xsl:namespace name="{@prefix}" select="@uri"/>
@@ -58,6 +69,99 @@ Copyright:
                         <xxx:with-param name="MasterMode" select="true()"/>
                     </xxx:apply-templates>
                 </master>
+            </xxx:template>
+            <xxx:template match="text()">
+                <xxx:param name="MasterRoot"/>
+                <xxx:param name="MasterMode" select="false()"/>
+                <xxx:choose>
+                    <xxx:when test="$MasterRoot">
+                        <!-- op:QName-equal -->
+                        <xxx:variable name="Name" select="../local-name()"/>
+                        <xxx:variable name="Namespace" select="../namespace-uri()"/>
+                        <xxx:variable name="MyPos">
+                            <xsl:choose>
+                                <xsl:when test="$IgnoredOrderList/cs:ignore-order">
+                                    <xxx:choose>
+                                        <xsl:for-each select="$IgnoredOrderList/cs:ignore-order">
+                                            <xxx:when test="../name()='{@element}'">
+                                                <xxx:choose>
+                                                    <xsl:for-each select="cs:match">
+                                                        <xxx:when test="$MasterRoot/../{replace(@xpath,'current\(\)', 'current()/..')}">
+                                                            <xxx:value-of>
+                                                                <xsl:attribute name="select">
+                                                                    <xsl:text>count($MasterRoot/../</xsl:text>
+                                                                    <xsl:value-of select="replace(@xpath,'current\(\)', 'current()/..')"/>
+                                                                    <xsl:text>/preceding-sibling::</xsl:text>
+                                                                    <xsl:value-of select="../@element"/>
+                                                                    <xsl:text>)+1</xsl:text>
+                                                                </xsl:attribute>
+                                                            </xxx:value-of>
+                                                        </xxx:when>
+                                                    </xsl:for-each>
+                                                    <xxx:otherwise>
+                                                        <xxx:value-of select="count(../preceding-sibling::*[local-name()=$Name and namespace-uri()=$Namespace])+1"/>
+                                                    </xxx:otherwise>
+                                                </xxx:choose>
+                                            </xxx:when>
+                                        </xsl:for-each>
+                                        <xxx:otherwise>
+                                            <xxx:value-of select="count(../preceding-sibling::*[local-name()=$Name and namespace-uri()=$Namespace])+1"/>
+                                        </xxx:otherwise>
+                                    </xxx:choose>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xxx:value-of select="count(../preceding-sibling::*[local-name()=$Name and namespace-uri()=$Namespace])+1"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xxx:variable>
+                        <xxx:variable name="Master" select="$MasterRoot/../*[local-name()=$Name and namespace-uri()=$Namespace][number($MyPos)]"/>
+                        <xxx:choose>
+                            <xxx:when test="$Master">
+                                <xxx:variable name="mText">
+                                    <xxx:choose>
+                                        <xxx:when test="count($Master/text())=1">
+                                            <xxx:value-of select="$Master/text()"/>
+                                        </xxx:when>
+                                        <xxx:otherwise>
+                                            <xxx:variable name="TextPos" select="count(preceding-sibling::text())+1"/>
+                                            <xxx:value-of select="subsequence($Master/text(),$TextPos,1)"/>
+                                        </xxx:otherwise>
+                                    </xxx:choose>
+                                </xxx:variable>
+                                <xxx:choose>
+                                    <xxx:when test="count($mText) != 1">
+                                        <diff:removed/>
+                                    </xxx:when>
+                                    <xxx:otherwise>
+                                        <xxx:variable name="c-text" select="replace(., '^\s*(.+?)\s*$', '$1')"/>
+                                        <xxx:variable name="m-text" select="replace($mText, '^\s*(.+?)\s*$', '$1')"/>
+                                        <xxx:choose>
+                                            <xxx:when test="$c-text=('',' ') and $m-text=('',' ')">
+                                                <xxx:value-of select="."/>
+                                            </xxx:when>
+                                            <xxx:when test="$c-text != $m-text">
+                                                <xxx:value-of select="replace($c-text,' ','&#160;')"/>
+                                                <diff:changed>
+                                                    <xxx:value-of select="replace($m-text,' ','&#160;')"/>
+                                                </diff:changed>
+                                            </xxx:when>
+                                            <xxx:otherwise>
+                                                <xxx:value-of select="."/>
+                                            </xxx:otherwise>
+                                        </xxx:choose>
+                                    </xxx:otherwise>
+                                </xxx:choose>
+                            </xxx:when>
+                            <xxx:otherwise>
+                                <xxx:value-of select="."/>
+                                <diff:removed/>
+                            </xxx:otherwise>
+                        </xxx:choose>
+                    </xxx:when>
+                    <xxx:otherwise>
+                        <xxx:value-of select="."/>
+                    </xxx:otherwise>
+                </xxx:choose>
             </xxx:template>
             <xxx:template match="*" priority="-1">
                 <xxx:param name="MasterRoot"/>
@@ -101,7 +205,7 @@ Copyright:
                                     </xxx:choose>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xxx:value-of select="count(preceding-sibling::*[local-name()=$Name and namespace-uri()=$Namespace])+1"/>    
+                                    <xxx:value-of select="count(preceding-sibling::*[local-name()=$Name and namespace-uri()=$Namespace])+1"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xxx:variable>
@@ -133,24 +237,6 @@ Copyright:
                                     <xxx:if test="$Pos != count($Master/preceding-sibling::*)+1">
                                         <xxx:attribute name="diff:moved" select="concat('pos ', count($Master/preceding-sibling::*)+1)"/>
                                     </xxx:if>
-                                    <xxx:choose>
-                                        <xxx:when test="$Master/text() = ' '  and text() != ' '">
-                                            <xxx:value-of select="text()"/>
-                                            <diff:changed>
-                                                <xxx:value-of select="$Master/text()"/>
-                                            </diff:changed>
-                                        </xxx:when>
-                                        <!-- normalize-space() needed? -->
-                                        <xxx:when test="text() != $Master/text()">
-                                            <xxx:value-of select="text()"/>
-                                            <diff:changed>
-                                                <xxx:value-of select="$Master/text()"/>
-                                            </diff:changed>
-                                        </xxx:when>
-                                        <xxx:when test="text()">
-                                            <xxx:value-of select="text()"/>
-                                        </xxx:when>
-                                    </xxx:choose>
                                     <xxx:apply-templates>
                                         <xxx:with-param name="MasterRoot" select="$Master"/>
                                         <xxx:with-param name="MasterMode" select="$MasterMode"/>
@@ -167,7 +253,7 @@ Copyright:
                         </xxx:choose>
                     </xxx:when>
                     <xxx:otherwise>
-                    <!--  <xxx:message>Current[<xxx:value-of select="name()"/> != new?]</xxx:message>-->
+                        <!--  <xxx:message>Current[<xxx:value-of select="name()"/> != new?]</xxx:message>-->
                         <xxx:apply-templates/>
                     </xxx:otherwise>
                 </xxx:choose>

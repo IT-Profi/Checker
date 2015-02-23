@@ -14,13 +14,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/.
 ========================================================================
 Copyright:
-(c) 2010-2014 by InterSecurity GmbH & Co. KG, Germany
+(c) 2010-2015 by InterSecurity GmbH & Co. KG, Germany
 ========================================================================
 @Author: Eduard Huber
 @Version: 1.0
 ======================================================================== 
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cs="http://checker.bintellix.de/checkset/" xmlns:xxx="http://compare.intersecurity.net/dummy/" xmlns:err="http://compare.intersecurity.net/error-report/" exclude-result-prefixes="xsl" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:cs="http://checker.bintellix.de/checkset/" xmlns:err="http://compare.intersecurity.net/error-report/" xmlns:xxx="http://compare.intersecurity.net/dummy/" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xsl" version="2.0">
     <xsl:param name="Cleanup" select="false()"/>
     <xsl:param name="type" select="'master'"/> <!-- current or master -->
     <xsl:param name="mode" select="'change'"/> <!-- 'change' or 'list' -->
